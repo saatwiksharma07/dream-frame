@@ -58,7 +58,6 @@ export default function HeroSection() {
             {/* Cursive script — mirrors "Arcane" overlay in reference */}
             <span className="brand-script" aria-hidden="true">Dream</span>
 
-            {/* The mega brand word — "Dream" is handled by the cursive overlay above */}
             <h1 className="brand-word">FRAME</h1>
           </div>
         </div>
