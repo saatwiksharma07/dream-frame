@@ -1,26 +1,331 @@
 @import "tailwindcss";
 
+/* ─── Design tokens ─────────────────────────────────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  --bg:          #0a0a0f;
+  --surface:     #111118;
+  --border:      rgba(139, 92, 246, 0.18);
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --purple:      #8b5cf6;
+  --violet:      #6d28d9;
+  --orange:      #f97316;
+  --orange-light:#fb923c;
+
+  --text-primary:   #f5f3ff;
+  --text-secondary: rgba(245, 243, 255, 0.55);
+  --text-muted:     rgba(245, 243, 255, 0.35);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ─── Base reset ─────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body { height: 100%; }
+
+body {
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Hero Section ───────────────────────────────────────────────────────── */
+.hero-section {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+/* Glow blobs */
+.glow-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  z-index: 0;
+}
+.glow-blob--purple {
+  width: 55vw; height: 55vw;
+  top: -15%; left: -10%;
+  background: radial-gradient(circle, rgba(109, 40, 217, 0.30) 0%, transparent 70%);
+}
+.glow-blob--violet {
+  width: 40vw; height: 40vw;
+  bottom: -10%; right: 5%;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.22) 0%, transparent 70%);
+}
+.glow-blob--orange {
+  width: 20vw; height: 20vw;
+  bottom: 15%; left: 50%;
+  background: radial-gradient(circle, rgba(249, 115, 22, 0.14) 0%, transparent 70%);
+}
+
+/* Subtle grain texture */
+.noise-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px;
+}
+
+/* Inner wrapper */
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(1.5rem, 4vw, 3rem) clamp(1.25rem, 5vw, 4rem);
+  gap: clamp(2rem, 4vw, 3.5rem);
+}
+
+/* ── Top meta row ── */
+.hero-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 1.25rem;
+}
+.meta-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.meta-col--center { align-items: center; text-align: center; }
+.meta-col--right  { align-items: flex-end; text-align: right; }
+
+.meta-label {
+  font-size: clamp(0.6rem, 1.2vw, 0.7rem);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.meta-value {
+  font-size: clamp(0.65rem, 1.4vw, 0.78rem);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+.meta-value.orange { color: var(--orange); }
+
+/* ── Brand block ── */
+.hero-brand {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(0.75rem, 2vw, 1.25rem);
+}
+
+/* Badge */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  background: rgba(109, 40, 217, 0.12);
+  backdrop-filter: blur(8px);
+  font-size: clamp(0.6rem, 1.2vw, 0.68rem);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--purple);
+  width: fit-content;
+}
+.badge-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--purple);
+  box-shadow: 0 0 8px var(--purple);
+  animation: pulse-dot 2.4s ease-in-out infinite;
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.55; transform: scale(0.85); }
+}
+
+/* Brand lockup */
+.brand-lockup {
+  position: relative;
+  line-height: 1;
+}
+.brand-text {
+  font-size: clamp(4.5rem, 14vw, 12rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 0.9;
+  text-transform: uppercase;
+  /* Orange fill with subtle purple glow — mirrors the reference amber brand word */
+  color: var(--orange);
+  text-shadow:
+    0 0 80px rgba(249, 115, 22, 0.35),
+    0 0 160px rgba(249, 115, 22, 0.15);
+  user-select: none;
+}
+/* Cursive overlay — mirrors "Arcane" script in the reference */
+.brand-script {
+  position: absolute;
+  top: 8%;
+  left: 1%;
+  font-size: clamp(2rem, 6vw, 6rem);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--text-primary);
+  opacity: 0.9;
+  pointer-events: none;
+  /* Use a serif / cursive stack for the editorial script feel */
+  font-family: Georgia, 'Times New Roman', serif;
+  letter-spacing: -0.02em;
+  text-shadow: 0 2px 24px rgba(139, 92, 246, 0.4);
+}
+
+/* Release stamp */
+.release-stamp {
+  font-size: clamp(0.6rem, 1.2vw, 0.7rem);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  align-self: flex-end;
+}
+
+/* ── Bottom row ── */
+.hero-bottom {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  border-top: 1px solid var(--border);
+  padding-top: 1.5rem;
+}
+
+/* Headline + CTA */
+.hero-headline {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 36ch;
+}
+.hero-headline h2 {
+  font-size: clamp(1.4rem, 3.5vw, 2.4rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+.headline-accent {
+  color: var(--purple);
+}
+.hero-desc {
+  font-size: clamp(0.82rem, 1.5vw, 0.96rem);
+  line-height: 1.65;
+  color: var(--text-secondary);
+  max-width: 32ch;
+}
+
+/* CTA button */
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: 999px;
+  font-size: clamp(0.82rem, 1.4vw, 0.92rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  color: #fff;
+  background: linear-gradient(135deg, var(--orange) 0%, var(--violet) 100%);
+  box-shadow:
+    0 0 24px rgba(249, 115, 22, 0.35),
+    0 0 48px rgba(109, 40, 217, 0.20);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+  width: fit-content;
+}
+.cta-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  filter: brightness(1.08);
+  box-shadow:
+    0 0 36px rgba(249, 115, 22, 0.5),
+    0 0 64px rgba(109, 40, 217, 0.30);
+}
+.cta-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Prompt chip */
+.prompt-chip {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  max-width: 28ch;
+  flex-shrink: 0;
+  padding: 0.9rem 1.1rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border);
+  background: rgba(139, 92, 246, 0.06);
+  backdrop-filter: blur(12px);
+}
+.prompt-label {
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--purple);
+  font-weight: 700;
+}
+.prompt-text {
+  font-size: clamp(0.72rem, 1.3vw, 0.82rem);
+  color: var(--text-secondary);
+  line-height: 1.5;
+  font-style: italic;
+}
+
+/* ─── Responsive — Mobile ────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .hero-meta {
+    grid-template-columns: 1fr 1fr;
+  }
+  .meta-col--center {
+    display: none;          /* hide middle column on very small screens */
+  }
+
+  .hero-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+
+  .prompt-chip {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .brand-script {
+    top: 5%;
+    font-size: clamp(1.5rem, 8vw, 3rem);
+  }
+
+  .release-stamp {
+    align-self: flex-start;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@media (max-width: 400px) {
+  .hero-meta {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  .meta-col--right { align-items: flex-start; text-align: left; }
 }
