@@ -1,5 +1,10 @@
 import HeroSection from "./components/HeroSection";
+import ScrollSequence from "./components/ScrollSequence";
 
 export default function Home() {
-  return <HeroSection />;
+  return (
+    <ScrollSequence>
+      <HeroSection />
+    </ScrollSequence>
+  );
 }

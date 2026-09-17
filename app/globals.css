@@ -393,3 +393,62 @@ body {
   }
 }
 
+/* ═══════════════════════════════════════════════════
+   SCROLL SEQUENCE
+   Creates the 400vh scroll space + sticky viewport.
+   The canvas sits behind; hero content floats above.
+═══════════════════════════════════════════════════ */
+
+/* Outer scroll space — sets how long the pin lasts */
+.scroll-seq {
+  position: relative;
+  height: 400vh;
+  /* Prevent horizontal overflow caused by wide brand text */
+  overflow-x: hidden;
+}
+
+/* Sticky viewport window — stays in place while parent scrolls */
+.scroll-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  /* Isolate the stacking context */
+  isolation: isolate;
+}
+
+/* Hero wrapper — floats above canvas on z-axis */
+.scroll-content {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  width: 100%;
+}
+
+/* Make the hero background transparent so the canvas shows through.
+   All other hero styles (layout, spacing, colors, typography) are unchanged. */
+.scroll-seq .hero {
+  background: transparent !important;
+  min-height: 100%;
+}
+
+/* Atmospheric dark overlay on top of canvas frames —
+   keeps text legible without washing out the animation */
+.scroll-sticky::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    /* Top vignette — preserves meta bar readability */
+    linear-gradient(to bottom,
+      rgba(8, 8, 14, 0.72) 0%,
+      rgba(8, 8, 14, 0.10) 25%,
+      transparent 55%,
+      rgba(8, 8, 14, 0.30) 80%,
+      rgba(8, 8, 14, 0.65) 100%
+    );
+}
+
