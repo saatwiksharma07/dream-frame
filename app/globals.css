@@ -1,31 +1,13 @@
 @import "tailwindcss";
 
-/* ─── Design tokens ─────────────────────────────────────────────────────── */
 /* ═══════════════════════════════════════════════════
    DESIGN TOKENS
 ═══════════════════════════════════════════════════ */
 :root {
-  --bg:          #0a0a0f;
-  --surface:     #111118;
-  --border:      rgba(139, 92, 246, 0.18);
-
-  --purple:      #8b5cf6;
-  --violet:      #6d28d9;
-  --orange:      #f97316;
-  --orange-light:#fb923c;
-
-  --text-primary:   #f5f3ff;
-  --text-secondary: rgba(245, 243, 255, 0.55);
-  --text-muted:     rgba(245, 243, 255, 0.35);
-
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
   --bg:           #08080e;
   --orange:       #f97316;
-  --orange-dim:   rgba(249, 115, 22, 0.55);
   --purple:       #a78bfa;
   --purple-deep:  #6d28d9;
-  --purple-glow:  rgba(109, 40, 217, 0.28);
   --border:       rgba(167, 139, 250, 0.14);
   --text:         #f0ecff;
   --text-mid:     rgba(240, 236, 255, 0.50);
@@ -33,28 +15,20 @@
   --font-sans:    var(--font-geist-sans);
 }
 
-/* ─── Base reset ─────────────────────────────────────────────────────────── */
 /* ═══════════════════════════════════════════════════
    RESET & BASE
 ═══════════════════════════════════════════════════ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 html, body { height: 100%; }
-
 body {
   background: var(--bg);
-  color: var(--text-primary);
   color: var(--text);
   font-family: var(--font-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
-/* ─── Hero Section ───────────────────────────────────────────────────────── */
-.hero-section {
 /* ═══════════════════════════════════════════════════
-   HERO — OUTER SHELL
-   Mirrors the dark editorial card from the reference,
-   with a clipped dark background and bleed edges.
+   HERO SHELL
 ═══════════════════════════════════════════════════ */
 .hero {
   position: relative;
@@ -63,29 +37,16 @@ body {
   display: flex;
   align-items: stretch;
   overflow: hidden;
-  background: var(--bg);
   background: #0d0d14;
-  /* Subtle inner-border glow like the reference card edge */
-  box-shadow: inset 0 0 0 1px rgba(167, 139, 250, 0.08);
 }
 
-/* Glow blobs */
-.glow-blob {
 /* ── Background atmosphere ── */
 .hero-bg {
   position: absolute;
-  border-radius: 50%;
-  filter: blur(120px);
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  z-index: 0;
 }
-.glow-blob--purple {
-  width: 55vw; height: 55vw;
-  top: -15%; left: -10%;
-  background: radial-gradient(circle, rgba(109, 40, 217, 0.30) 0%, transparent 70%);
-/* Deep purple left-side nebula  */
 .hero-bg::before {
   content: "";
   position: absolute;
@@ -100,11 +61,6 @@ body {
   );
   filter: blur(60px);
 }
-.glow-blob--violet {
-  width: 40vw; height: 40vw;
-  bottom: -10%; right: 5%;
-  background: radial-gradient(circle, rgba(139, 92, 246, 0.22) 0%, transparent 70%);
-/* Warm orange flare at brand text area */
 .hero-bg::after {
   content: "";
   position: absolute;
@@ -118,11 +74,6 @@ body {
   );
   filter: blur(70px);
 }
-.glow-blob--orange {
-  width: 20vw; height: 20vw;
-  bottom: 15%; left: 50%;
-  background: radial-gradient(circle, rgba(249, 115, 22, 0.14) 0%, transparent 70%);
-/* Right-side violet accent */
 .hero-bg-right {
   position: absolute;
   width: 40%;
@@ -135,22 +86,13 @@ body {
   );
   filter: blur(80px);
 }
-
-/* Subtle grain texture */
-.noise-overlay {
-/* Film grain noise */
 .hero-grain {
   position: absolute;
   inset: 0;
-  z-index: 1;
-  opacity: 0.035;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 200px;
   opacity: 0.04;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23g)'/%3E%3C/svg%3E");
   background-size: 180px;
 }
-/* Horizontal scan lines — adds the cinematic film feel */
 .hero-scanlines {
   position: absolute;
   inset: 0;
@@ -164,50 +106,31 @@ body {
   pointer-events: none;
 }
 
-/* Inner wrapper */
-/* ── Layout grid ── */
+/* ── Inner layout grid ── */
 .hero-inner {
   position: relative;
   z-index: 2;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: clamp(1.5rem, 4vw, 3rem) clamp(1.25rem, 5vw, 4rem);
-  gap: clamp(2rem, 4vw, 3.5rem);
   display: grid;
   grid-template-rows: auto 1fr auto;
   padding: clamp(1.25rem, 3.5vw, 2.5rem) clamp(1.25rem, 5vw, 3.5rem);
-  gap: 0;
 }
 
-/* ── Top meta row ── */
-.hero-meta {
 /* ═══════════════════════════════════════════════════
    TOP META BAR
-   Three-column info strip — exact mirror of the
-   "A Film By · Title · Studio" row in the reference
 ═══════════════════════════════════════════════════ */
 .meta-bar {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 1rem;
   grid-template-columns: 1fr auto 1fr;
   align-items: start;
   padding-bottom: clamp(0.9rem, 2.5vw, 1.5rem);
   border-bottom: 1px solid var(--border);
-  padding-bottom: 1.25rem;
 }
-.meta-col {
 .meta-item {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
   gap: 0.2rem;
 }
-.meta-col--center { align-items: center; text-align: center; }
-.meta-col--right  { align-items: flex-end; text-align: right; }
-
 .meta-item--center {
   text-align: center;
   align-items: center;
@@ -218,48 +141,34 @@ body {
   text-align: right;
 }
 .meta-label {
-  font-size: clamp(0.6rem, 1.2vw, 0.7rem);
-  letter-spacing: 0.12em;
   font-size: clamp(0.56rem, 1vw, 0.65rem);
   font-weight: 500;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--text-muted);
   color: var(--text-dim);
 }
 .meta-value {
-  font-size: clamp(0.65rem, 1.4vw, 0.78rem);
-  letter-spacing: 0.1em;
   font-size: clamp(0.62rem, 1.1vw, 0.72rem);
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  font-weight: 700;
-  color: var(--text-secondary);
   color: var(--text-mid);
   line-height: 1.3;
 }
-.meta-value.orange { color: var(--orange); }
 .meta-value--accent { color: var(--orange); }
 .meta-value--purple { color: var(--purple); }
 
-/* ── Brand block ── */
-.hero-brand {
-  flex: 1;
 /* ═══════════════════════════════════════════════════
-   BRAND STAGE — the cinematic center
+   BRAND STAGE
 ═══════════════════════════════════════════════════ */
 .brand-stage {
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: clamp(0.75rem, 2vw, 1.25rem);
   justify-content: flex-end;
   padding-top: clamp(1.5rem, 4vw, 3rem);
 }
 
-/* Badge */
 /* Badge row */
 .badge-row {
   display: flex;
@@ -270,16 +179,9 @@ body {
 .badge {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.35rem 0.85rem;
   gap: 0.45rem;
   padding: 0.3rem 0.8rem;
   border-radius: 999px;
-  border: 1px solid rgba(139, 92, 246, 0.4);
-  background: rgba(109, 40, 217, 0.12);
-  backdrop-filter: blur(8px);
-  font-size: clamp(0.6rem, 1.2vw, 0.68rem);
-  letter-spacing: 0.18em;
   border: 1px solid rgba(167, 139, 250, 0.35);
   background: rgba(109, 40, 217, 0.14);
   backdrop-filter: blur(10px);
@@ -287,25 +189,17 @@ body {
   font-weight: 800;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  font-weight: 700;
   color: var(--purple);
-  width: fit-content;
 }
 .badge-dot {
-  width: 6px; height: 6px;
   width: 5px;
   height: 5px;
   border-radius: 50%;
   background: var(--purple);
-  box-shadow: 0 0 8px var(--purple);
-  animation: pulse-dot 2.4s ease-in-out infinite;
   box-shadow: 0 0 6px var(--purple);
   flex-shrink: 0;
   animation: blink 2.5s ease-in-out infinite;
 }
-@keyframes pulse-dot {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50%       { opacity: 0.55; transform: scale(0.85); }
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50%       { opacity: 0.35; }
@@ -319,62 +213,33 @@ body {
 }
 
 /* Brand lockup */
-/* ── The oversized brand name lockup ──
-   This is the key visual: a massive full-width word
-   in bold orange, with a cursive word overlaid on top,
-   exactly like "ODYSSEY" + "Arcane" in the reference.
-── */
 .brand-lockup {
   position: relative;
   line-height: 1;
-  /* Overflow visible so the script can bleed above */
   overflow: visible;
 }
-.brand-text {
-  font-size: clamp(4.5rem, 14vw, 12rem);
-
-/* The massive primary word — fills the container width */
 .brand-word {
   display: block;
   font-size: clamp(5rem, 17.5vw, 16rem);
   font-weight: 900;
-  letter-spacing: -0.03em;
-  line-height: 0.9;
   letter-spacing: -0.04em;
   line-height: 0.88;
   text-transform: uppercase;
-  /* Orange fill with subtle purple glow — mirrors the reference amber brand word */
   color: var(--orange);
-  /* Warm backlit glow matching the amber text in reference */
   text-shadow:
-    0 0 80px rgba(249, 115, 22, 0.35),
-    0 0 160px rgba(249, 115, 22, 0.15);
     0 0 60px rgba(249, 115, 22, 0.45),
     0 0 120px rgba(249, 115, 22, 0.20),
-    0 4px 0px rgba(0,0,0,0.5);
+    0 4px 0px rgba(0, 0, 0, 0.5);
   user-select: none;
-  /* Prevent line wrap */
   white-space: nowrap;
 }
-/* Cursive overlay — mirrors "Arcane" script in the reference */
-
-/* The cursive overlay word — floats on top of the brand word
-   mirroring the "Arcane" italic script in the reference */
 .brand-script {
   position: absolute;
-  top: 8%;
-  left: 1%;
-  font-size: clamp(2rem, 6vw, 6rem);
-  /* Vertically centered in the brand word */
   top: 10%;
   left: -0.5%;
-  /* Larger than in v1 — should feel bold and editorial */
   font-size: clamp(2.2rem, 7vw, 7.5rem);
   font-family: "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
   font-style: italic;
-  font-weight: 300;
-  color: var(--text-primary);
-  opacity: 0.9;
   font-weight: 400;
   color: #ffffff;
   letter-spacing: -0.01em;
@@ -383,33 +248,12 @@ body {
     0 2px 30px rgba(139, 92, 246, 0.55),
     0 0 60px rgba(139, 92, 246, 0.25);
   pointer-events: none;
-  /* Use a serif / cursive stack for the editorial script feel */
-  font-family: Georgia, 'Times New Roman', serif;
-  letter-spacing: -0.02em;
-  text-shadow: 0 2px 24px rgba(139, 92, 246, 0.4);
   user-select: none;
-  /* Layered over the orange text */
   z-index: 1;
 }
 
-/* Release stamp */
-.release-stamp {
-  font-size: clamp(0.6rem, 1.2vw, 0.7rem);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  align-self: flex-end;
-}
-
-/* ── Bottom row ── */
-.hero-bottom {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 2rem;
 /* ═══════════════════════════════════════════════════
-   BOTTOM ROW — headline, description, CTA, prompt chip
+   BOTTOM BAR
 ═══════════════════════════════════════════════════ */
 .bottom-bar {
   display: grid;
@@ -418,94 +262,58 @@ body {
   gap: clamp(1.5rem, 4vw, 3rem);
   padding-top: clamp(1rem, 2.5vw, 1.75rem);
   border-top: 1px solid var(--border);
-  padding-top: 1.5rem;
   margin-top: clamp(0.75rem, 2vw, 1.25rem);
 }
-
-/* Headline + CTA */
-.hero-headline {
-/* Left: headline + copy + CTA */
 .hero-copy {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  max-width: 36ch;
   gap: 0.75rem;
 }
-.hero-headline h2 {
-  font-size: clamp(1.4rem, 3.5vw, 2.4rem);
 .hero-headline {
   font-size: clamp(1.25rem, 3vw, 2.1rem);
   font-weight: 700;
-  line-height: 1.15;
-  letter-spacing: -0.02em;
-  color: var(--text-primary);
   line-height: 1.18;
   letter-spacing: -0.025em;
   color: var(--text);
 }
-.headline-accent {
 .hero-headline em {
   font-style: normal;
   color: var(--purple);
 }
 .hero-desc {
-  font-size: clamp(0.82rem, 1.5vw, 0.96rem);
-  line-height: 1.65;
-  color: var(--text-secondary);
-  max-width: 32ch;
   font-size: clamp(0.78rem, 1.4vw, 0.9rem);
   line-height: 1.7;
   color: var(--text-mid);
   max-width: 38ch;
 }
-
-/* CTA button */
-.cta-btn {
 .hero-cta {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.75rem;
   gap: 0.55rem;
   padding: 0.7rem 1.6rem;
   border-radius: 999px;
-  font-size: clamp(0.82rem, 1.4vw, 0.92rem);
   font-size: clamp(0.78rem, 1.3vw, 0.88rem);
   font-weight: 700;
-  letter-spacing: 0.04em;
   letter-spacing: 0.05em;
   text-decoration: none;
   color: #fff;
-  background: linear-gradient(135deg, var(--orange) 0%, var(--violet) 100%);
   background: linear-gradient(130deg, #f97316 0%, #9333ea 100%);
   box-shadow:
-    0 0 24px rgba(249, 115, 22, 0.35),
-    0 0 48px rgba(109, 40, 217, 0.20);
-  transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
-  width: fit-content;
     0 0 20px rgba(249, 115, 22, 0.40),
     0 0 40px rgba(147, 51, 234, 0.22),
-    inset 0 1px 0 rgba(255,255,255,0.15);
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
   transition: transform 0.15s ease, filter 0.15s ease, box-shadow 0.15s ease;
   align-self: flex-start;
   margin-top: 0.25rem;
 }
-.cta-btn:hover {
-  transform: translateY(-2px) scale(1.02);
-  filter: brightness(1.08);
 .hero-cta:hover {
   transform: translateY(-2px) scale(1.025);
   filter: brightness(1.10);
   box-shadow:
-    0 0 36px rgba(249, 115, 22, 0.5),
-    0 0 64px rgba(109, 40, 217, 0.30);
     0 0 32px rgba(249, 115, 22, 0.55),
     0 0 64px rgba(147, 51, 234, 0.35),
-    inset 0 1px 0 rgba(255,255,255,0.15);
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
-.cta-btn:active {
-  transform: translateY(0) scale(0.98);
 .hero-cta:active { transform: scale(0.97); }
 .cta-arrow {
   width: 15px;
@@ -514,12 +322,9 @@ body {
 }
 
 /* Prompt chip */
-/* Right: prompt chip */
 .prompt-chip {
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
-  max-width: 28ch;
   gap: 0.4rem;
   min-width: 200px;
   max-width: 260px;
@@ -529,27 +334,14 @@ body {
   background: rgba(109, 40, 217, 0.07);
   backdrop-filter: blur(16px);
   flex-shrink: 0;
-  padding: 0.9rem 1.1rem;
-  border-radius: 0.75rem;
-  border: 1px solid var(--border);
-  background: rgba(139, 92, 246, 0.06);
-  backdrop-filter: blur(12px);
 }
-.prompt-label {
-  font-size: 0.6rem;
-  letter-spacing: 0.18em;
 .prompt-chip-label {
   font-size: 0.56rem;
   font-weight: 800;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--purple);
-  font-weight: 700;
 }
-.prompt-text {
-  font-size: clamp(0.72rem, 1.3vw, 0.82rem);
-  color: var(--text-secondary);
-  line-height: 1.5;
 .prompt-chip-text {
   font-size: clamp(0.68rem, 1.2vw, 0.78rem);
   line-height: 1.55;
@@ -564,9 +356,6 @@ body {
   opacity: 0.6;
 }
 
-/* ─── Responsive — Mobile ────────────────────────────────────────────────── */
-@media (max-width: 640px) {
-  .hero-meta {
 /* ═══════════════════════════════════════════════════
    RESPONSIVE
 ═══════════════════════════════════════════════════ */
@@ -574,43 +363,25 @@ body {
   .meta-bar {
     grid-template-columns: 1fr 1fr;
   }
-  .meta-col--center {
-    display: none;          /* hide middle column on very small screens */
-  }
   .meta-item--center { display: none; }
 
-  .hero-bottom {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1.5rem;
   .bottom-bar {
     grid-template-columns: 1fr;
   }
-
   .prompt-chip {
     max-width: 100%;
-    width: 100%;
   }
 
   .brand-script {
-    top: 5%;
-    font-size: clamp(1.5rem, 8vw, 3rem);
     font-size: clamp(1.6rem, 9vw, 3.5rem);
-  }
-
-  .release-stamp {
-    align-self: flex-start;
   }
 }
 
-@media (max-width: 400px) {
-  .hero-meta {
 @media (max-width: 480px) {
   .meta-bar {
     grid-template-columns: 1fr;
     gap: 0.75rem;
   }
-  .meta-col--right { align-items: flex-start; text-align: left; }
   .meta-item--right {
     align-items: flex-start;
     text-align: left;
@@ -621,3 +392,4 @@ body {
     gap: 0.5rem;
   }
 }
+
