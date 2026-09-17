@@ -19,7 +19,8 @@
    RESET & BASE
 ═══════════════════════════════════════════════════ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { height: 100%; }
+html { min-height: 100%; }
+body { min-height: 100%; }
 body {
   background: var(--bg);
   color: var(--text);
@@ -409,8 +410,9 @@ body {
 .scroll-seq {
   position: relative;
   height: 400vh;
-  /* Prevent horizontal overflow caused by wide brand text */
-  overflow-x: hidden;
+/* overflow-x:clip clips visually WITHOUT creating a scroll container.
+   overflow-x:hidden would force overflow-y:auto → new scroll context → breaks sticky. */
+  overflow-x: clip;
 }
 
 /* Sticky viewport window — stays in place while parent scrolls */
