@@ -289,7 +289,7 @@ body {
 .hero-desc {
   font-size: clamp(0.78rem, 1.4vw, 0.9rem);
   line-height: 1.7;
-  color: var(--text-mid);
+  color: rgba(255, 255, 255, 0.92);
   max-width: 38ch;
 }
 .hero-cta {
