@@ -30,6 +30,8 @@ export default function ScrollCanvas({ scrollRef }: Props) {
     if (!canvas) return
     const ctx = canvas.getContext('2d', { alpha: false })
     if (!ctx) return
+    ctx.imageSmoothingEnabled  = true
+    ctx.imageSmoothingQuality  = 'high'
 
     // Respect prefers-reduced-motion
     const reducedMotion =
@@ -89,7 +91,15 @@ export default function ScrollCanvas({ scrollRef }: Props) {
         sy = (img.naturalHeight - sh) / 2
       }
 
-      ctx.drawImage(img, sx, sy, sw, sh, 0, 0, W, H)
+      // Slight zoom-in (1.08×) — crops edges, makes subject feel closer + upscaled
+      const ZOOM  = 1.08
+      const dstW  = W * ZOOM
+      const dstH  = H * ZOOM
+      const dstX  = (W - dstW) / 2   // centre the zoomed image
+      const dstY  = (H - dstH) / 2
+
+      ctx.clearRect(0, 0, W, H)
+      ctx.drawImage(img, sx, sy, sw, sh, dstX, dstY, dstW, dstH)
     }
 
     // ── Scroll → target frame ─────────────────────────────────────────────────

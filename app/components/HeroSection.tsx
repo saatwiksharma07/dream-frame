@@ -19,7 +19,7 @@ export default function HeroSection() {
           {/* Left */}
           <div className="meta-item">
             <span className="meta-label">Created by</span>
-            <span className="meta-value meta-value--accent">DREAMFRAME</span>
+            <span className="meta-value meta-value--accent">SAATWIK</span>
           </div>
 
           {/* Center */}

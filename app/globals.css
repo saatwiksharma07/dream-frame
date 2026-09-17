@@ -159,15 +159,13 @@ body {
 .meta-value--accent { color: var(--orange); }
 .meta-value--purple { color: var(--purple); }
 
-/* ═══════════════════════════════════════════════════
-   BRAND STAGE
-═══════════════════════════════════════════════════ */
+/* Brand stage — sits in the middle row of the layout grid */
 .brand-stage {
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  padding-top: clamp(1.5rem, 4vw, 3rem);
+  justify-content: flex-start;   /* top-align → sits in the clear sky area */
+  padding-top: clamp(0.75rem, 1.5vw, 1.25rem);
 }
 
 /* Badge row */
