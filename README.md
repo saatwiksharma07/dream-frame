@@ -1,36 +1,187 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎞️ DreamFrame
 
-## Getting Started
+> **Turn imagination into visual experiences.**
 
-First, run the development server:
+DreamFrame is an experimental **AI image-generation product experience** built with Next.js. The project focuses on creating a cinematic, highly visual interface around the idea of generating images from imagination.
+
+Rather than treating the project as a simple form-and-result application, DreamFrame explores how **motion, typography, visual storytelling, and product UI** can make an AI experience feel immersive.
+
+## ✨ Highlights
+
+- 🎬 **Cinematic hero experience** with a scroll-driven visual sequence
+- 🖼️ **AI image-generation product concept** designed around prompt-to-image workflows
+- 🧭 **Scroll-based storytelling** using a canvas-driven sequence
+- ♾️ **Infinite logo marquee** for a dynamic product section
+- 🧩 **Bento-style feature layout** for product capabilities and visual storytelling
+- 🎨 Dark, cinematic visual direction with custom CSS
+- 📱 Responsive web experience designed for modern browsers
+- ⚡ Next.js App Router architecture
+- 🧱 Component-based React structure for reusable sections
+
+## 🧠 Project Concept
+
+The central idea behind DreamFrame is simple:
+
+**A user's imagination should be the starting point of the interface.**
+
+The product direction combines an AI image-generation concept with a cinematic landing experience:
+
+```text
+User imagination
+       ↓
+     Prompt
+       ↓
+DreamFrame experience
+       ↓
+AI-generated visual
+       ↓
+Creative exploration
+```
+
+The current repository focuses heavily on the **frontend/product experience**. AI generation can be connected as the backend layer as the project evolves.
+
+## 🏗️ Architecture
+
+DreamFrame uses the Next.js App Router with reusable React components.
+
+```text
+dream-frame/
+├── app/
+│   ├── components/
+│   │   ├── BentoGrid.tsx
+│   │   ├── HeroSection.tsx
+│   │   ├── LogoMarquee.tsx
+│   │   ├── ScrollCanvas.tsx
+│   │   ├── ScrollSequence.tsx
+│   │   └── sections.css
+│   │
+│   ├── globals.css
+│   ├── layout.tsx
+│   └── page.tsx
+│
+├── public/
+├── next.config.ts
+├── postcss.config.mjs
+├── eslint.config.mjs
+├── tsconfig.json
+└── package.json
+```
+
+### Main components
+
+| Component | Purpose |
+|---|---|
+| `HeroSection` | Main cinematic product introduction |
+| `ScrollSequence` | Coordinates the scroll-driven hero experience |
+| `ScrollCanvas` | Handles canvas-based visual sequencing |
+| `LogoMarquee` | Creates the continuous logo/brand carousel |
+| `BentoGrid` | Presents product/features in a bento-style layout |
+| `sections.css` | Styling for the major product sections |
+
+## 🛠️ Tech Stack
+
+- **Next.js 16**
+- **React 19**
+- **TypeScript**
+- **Tailwind CSS 4**
+- **CSS**
+- **Next Font / Geist**
+- **ESLint**
+
+## 🚀 Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/saatwiksharma07/dream-frame.git
+cd dream-frame
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Start the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open **http://localhost:3000** in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📦 Available Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run dev
+npm run build
+npm run start
+npm run lint
+```
 
-## Learn More
+| Command | Purpose |
+|---|---|
+| `npm run dev` | Start the development server |
+| `npm run build` | Create a production build |
+| `npm run start` | Start the production server |
+| `npm run lint` | Run ESLint |
 
-To learn more about Next.js, take a look at the following resources:
+## 🎨 Design Direction
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+DreamFrame is intentionally designed around a **dark cinematic aesthetic**.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The interface emphasizes:
 
-## Deploy on Vercel
+- Large visual compositions
+- Motion and scroll interaction
+- Strong typography
+- High-contrast surfaces
+- Spatial layouts
+- Product storytelling
+- Minimal UI around the visual content
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The goal is to make the interface itself feel like part of the creative tool.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🔮 Roadmap
+
+### Current
+
+- [x] Next.js foundation
+- [x] Cinematic hero section
+- [x] Scroll-based visual sequence
+- [x] Logo marquee
+- [x] Bento-style sections
+- [x] Responsive styling foundation
+
+### Planned
+
+- [ ] Connect a real image-generation model/API
+- [ ] Prompt input and generation flow
+- [ ] Generation loading/progress states
+- [ ] Image history
+- [ ] Download/share generated images
+- [ ] User accounts and saved generations
+- [ ] Model/style controls
+- [ ] Production deployment
+
+## 📌 Project Status
+
+**Status:** 🧪 Experimental / In development
+
+DreamFrame is currently focused on the **frontend experience and product direction**. The AI generation layer is part of the planned evolution of the project.
+
+## 👤 Author
+
+**Saatwik Sharma**
+
+- GitHub: https://github.com/saatwiksharma07
+- LinkedIn: https://www.linkedin.com/in/saatwik-sharma-3039723a/
+
+## 📄 License
+
+No explicit open-source license is currently defined for this repository.
+
+---
+
+### 🚀 Dream it. Frame it. Create it.
